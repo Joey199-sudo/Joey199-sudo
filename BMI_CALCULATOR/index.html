@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>BMI Calculator</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand:400,700" rel="stylesheet">
+	<style>
+		*{
+			font-family: Trirong;
+			font-size: 16px;
+			color: #333;
+		}
+
+		h1 {
+  font-size: 30px;
+  font-weight: 300;
+  text-align: center;
+  color: #333;
+  padding-top: 15px;
+  display: block;
+}
+
+h1 b {
+  font-size: 32px;
+  font-weight: 300;
+  color:  #ff00ff;
+}
+		body{
+			background:linear-gradient(to bottom right,  #f9e6ff, #e6e6ff);
+
+		}
+
+		.container{
+			max-width: 500px;
+			margin:5px auto;
+		}
+
+		#result{
+			font-weight: bolder;
+		}
+
+		form{
+			background-color: #fff;
+			height: 240px;
+			width: 490px;
+			border-radius: 20px;
+			margin: 20px auto 20px auto;
+			display: block;
+			border: solid 1px #ff00ff;;
+			box-shadow: 0 0 40px 0 #ddd;
+			text-align: center;
+		}
+
+	form:hover {
+  		box-shadow: 0 0 60px 0 #ccc;
+  		transition: .4s;
+  		transform: scale(1.02);
+}
+
+.form-control{
+	width: 300px;
+	margin: 2px 110px;
+	border-radius: 10px;
+	background-color:  #ffe6ff;
+	border: none;
+	outline: none;
+	cursor: pointer;
+}
+
+.form-control:last-child {
+  margin-bottom: 20px;
+}
+
+.form-control:hover {
+  background-color: #ffccff;
+}
+
+
+.btn{
+	 border: none;
+  border-radius: 10px;
+  height: 40px;
+  width: 140px;
+  background-color: #ff00ff;;
+  color: #fff;
+  margin: auto;
+  display: block;
+  outline: none;
+  cursor: pointer;
+}
+
+.btn:hover{
+  background-color:  #cc00cc
+}
+
+.mt-3{
+	font-size: 25px;
+	font-weight: bolder;
+}
+
+
+
+
+
+	</style>
+
+
+</head>
+<body>
+	<div class="container-fluid">
+
+	<h1>What is a BMI calculator?</h1>
+		<p>BMI stands for Body Mass Index. A BMI calculator is just a simple calculator that can be used to measure the ratio of a person’s weight to the square of a person’s height. The aim of the BMI calculator is to find out if a person is overweight, underweight or have a good weight.
+
+The formula for BMI is given as follows:
+
+BMI = weight/ height²
+
+where the weight is measured in kilograms and the height is measured in metres. The SI unit of BMI will be given in kg/m².
+
+Note: There’s no way to distinguish between fat and muscles using BMI. Therefore, a person with a high BMI due to muscle mass need not worry about health issues associated with obesity or being overweight.</p>
+
+</div>
+	<div class="container mt-5">
+		
+		
+
+<h1 class="text-center"><b>B</b>ody <b>M</b>ass  <b>I</b>ndex Calculator</h1>
+
+		<form id="bmiForm" >
+			<div class="form-group">
+				<label for="height">Heigh(m): </label>
+				<input type="text" class="form-control" id="height" placeholder="Enter your height" required>
+			</div>
+
+			<div class="form-group">
+				<label for="weight">Weight(kg): </label>
+				<input type="text" class="form-control" id="weight" placeholder="Enter your weight" required>
+			</div>
+
+			<button type="button" class="btn btn-primary" onclick="calculateBMI()">Calculate BMI</button>
+
+			<div id="results" class="mt-3"></div>
+		</form>
+
+		
+	</div>
+
+<!--formula for bmi
+	multiply weight in kg by height in m2
+	e.g 1.65m tall & 85kg weighed
+	85 / 1.65* 1.65 = 31.22-->
+
+	
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+    	function calculateBMI(){
+    		var height = parseFloat(document.getElementById('height').value);
+
+    		var weight = parseFloat(document.getElementById('weight').value);
+
+    		if(isNaN(height) || isNaN(weight) || height<=0 || weight <= 0){
+    			alert('please enter valid height and weight values.');
+    			return;
+    		}
+
+    		var bmi = weight / (height * height);
+    		displayResults(bmi);
+
+    	}
+
+
+    	function displayResults(bmi){
+    		var resultElement = document.getElementById('results');
+
+    		resultElement.innerHTML = 'Your BMI is: ' + bmi.toFixed(2);
+
+    		if(bmi < 18.5){
+    			resultElement.innerHTML += '- Underwieght';
+
+    		}else if(bmi >=18.5 && bmi < 25){
+    			resultElement.innerHTML += 'Normal weight';
+    		}else if (bmi >=25 && bmi < 30){
+    			resultElement.innerHTML += '-OverWeight';
+    		}else{
+    			resultElement.innerHTML += '-Obesity';
+    		}
+    	}
+    </script>
+</body>
+</html>
